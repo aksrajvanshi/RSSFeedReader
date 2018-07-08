@@ -55,7 +55,6 @@ public class MainRSSReadController {
 	 * 
 	 * The master method which processes the RSS Feed, retrieves the keyword, replaces the keyword and creates a file for that RSS Feed.
 	 */
-	@SuppressWarnings("unchecked")
 	public void RSSMainApplication(URL url, String keywordToBeReplaced){
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed inputFeed = null;
@@ -73,7 +72,6 @@ public class MainRSSReadController {
 		} 
         List<SyndEntry> modifiedFeedEntry = new ArrayList<>();
         SyndFeed modifiedFeed = new SyndFeedImpl();
-        
         if(inputFeed == null){
         	System.out.println("The Feed contained no items! The application will now exit. Please try another Feed URL");
         	System.exit(0);
