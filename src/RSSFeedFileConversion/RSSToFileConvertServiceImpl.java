@@ -18,7 +18,7 @@ public class RSSToFileConvertServiceImpl implements RSSToFileConvertService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void CreateFile(SyndFeed modifiedFeed, int fileCountIndex) {
+	public void CreateRssTextFile(SyndFeed modifiedFeed, int fileCountIndex) {
 		// TODO Auto-generated method stub
 		String filename = "RSSProgramFeedFile" + fileCountIndex + ".txt";
 		BufferedWriter bw = null;
