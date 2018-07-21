@@ -18,7 +18,6 @@ import URLRetrieve.RSSRetrieveService;
 import URLRetrieve.RSSRetrieveServiceImpl;
 import Validator.ValidatorService;
 import Validator.ValidatorServiceImpl;
-import model.Feed;
 
 public class MainRSSReadController {
 
@@ -30,11 +29,9 @@ public class MainRSSReadController {
 	
 	static RSSToFileConvertService fileCreateService;
 	
-	static ValidatorService urlValidatorService;
+	static ValidatorService validatorService;
 	
 	static FeedProcessorService feedProcessorService;
-	
-	Feed feed = null;
 	
 	static int fileCountIndex;
 	/**
@@ -44,7 +41,7 @@ public class MainRSSReadController {
 		rssService = new RSSRetrieveServiceImpl();
 		keywordService = new KeywordRetrieveServiceImpl();
 		fileCreateService = new RSSToFileConvertServiceImpl();
-		urlValidatorService = new ValidatorServiceImpl();
+		validatorService = new ValidatorServiceImpl();
 		feedProcessorService = new FeedProcessorServiceImpl();
 		fileCountIndex = 1;
 	}
@@ -57,16 +54,16 @@ public class MainRSSReadController {
 	 */
 	public void RSSMainApplication(URL url, String keywordToBeReplaced){
      
-        SyndFeed inputFeed = urlValidatorService.linkValidator(url);
+        SyndFeed inputFeed = validatorService.linkValidator(url);
 		
         List<SyndEntry> modifiedFeedEntry = new ArrayList<>();
         SyndFeed modifiedFeed = new SyndFeedImpl();
         
-        urlValidatorService.validateInputFeed(inputFeed);
+        validatorService.validateInputFeed(inputFeed);
         feedProcessorService.processFeed(keywordToBeReplaced, inputFeed, modifiedFeedEntry);
         
         modifiedFeed.setEntries(modifiedFeedEntry);
-        fileCreateService.CreateFile(modifiedFeed, fileCountIndex++);
+        fileCreateService.CreateRssTextFile(modifiedFeed, fileCountIndex++);
         	
 	}
 	

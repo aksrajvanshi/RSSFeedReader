@@ -3,6 +3,7 @@ package Validator;
 import java.io.IOException;
 import java.net.URL;
 
+import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
@@ -39,5 +40,22 @@ public class ValidatorServiceImpl implements ValidatorService {
         	System.exit(0);
         }
 	}
+	
+	
+	public SyndEntry validateEntry(SyndEntry entry){
+	    	
+	    	if(entry.getTitle() == null){
+	    		entry.setTitle(STRING_EMPTY);
+	    	}
+	    	if(entry.getLink() == null){
+	    		entry.setLink(STRING_EMPTY);
+	    	}
+	    	if(entry.getUri() == null){
+	    		entry.setUri(STRING_EMPTY);
+	    	}
+	    	
+	    	return entry;
+	    	
+	    }
 
 }
