@@ -1,4 +1,4 @@
-package RSSFeedPrinter;
+package RSSFeedProcessor;
 
 import java.util.List;
 
@@ -18,7 +18,6 @@ public class RSSFeedOutputServiceImpl implements RSSFeedOutputService{
 	    if(replaceString.equals("")){
 	      return entry;
 	    }
-	    
 		List<SyndEnclosure> encls = entry.getEnclosures();
         SyndEntry modifiedEntry = new SyndEntryImpl();
         modifiedEntry.setTitle(entry.getTitle().replaceAll("(?i).*"+replaceString+"*", ""));

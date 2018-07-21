@@ -12,13 +12,13 @@ import com.sun.syndication.feed.synd.SyndFeed;
 
 public class RSSToFileConvertServiceImpl implements RSSToFileConvertService {
 
-	
+
 	/**
 	 *  creates file from the modified Feed.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void CreateFile(SyndFeed modifiedFeed, int fileCountIndex) {
+	public void CreateRssTextFile(SyndFeed modifiedFeed, int fileCountIndex) {
 		// TODO Auto-generated method stub
 		String filename = "RSSProgramFeedFile" + fileCountIndex + ".txt";
 		BufferedWriter bw = null;
@@ -34,9 +34,9 @@ public class RSSToFileConvertServiceImpl implements RSSToFileConvertService {
 
 			fw = new FileWriter(file.getAbsoluteFile(), false);
 			bw = new BufferedWriter(fw);
-			
+
 			for (SyndEntry entry : (List<SyndEntry>) modifiedFeed.getEntries()) {
-			
+
 				bw.append("title: " + entry.getTitle());
 				bw.append("link: " + entry.getLink()+ "\n");
 				bw.append("guid: " + entry.getUri() + "\n");
@@ -44,7 +44,7 @@ public class RSSToFileConvertServiceImpl implements RSSToFileConvertService {
 				if(entry.getPublishedDate()!=null){
 					bw.append("pubDate: " + entry.getPublishedDate().toString() +  "\n");
 				}
-				
+
 				List<SyndEnclosure> encls = entry.getEnclosures();
 				if(encls.size()!=0){
 					bw.append("Enclosure URL: " + encls.get(0).getUrl() + "\n" + "\n");
@@ -52,7 +52,7 @@ public class RSSToFileConvertServiceImpl implements RSSToFileConvertService {
 				else{
 					bw.append("Enclosure URL: null"  + "\n" + "\n");
 				}
-					
+
 			}
 
 		} catch (IOException e) {
