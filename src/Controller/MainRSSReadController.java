@@ -21,19 +21,19 @@ import Validator.ValidatorServiceImpl;
 
 public class MainRSSReadController {
 
-	static URL url;
+	 private URL url;
 	
-	static RSSRetrieveService rssService;
+	 private RSSRetrieveService rssService;
 	
-	static KeywordRetrieveService keywordService;
+	 private KeywordRetrieveService keywordService;
 	
-	static RSSToFileConvertService fileCreateService;
+	 private RSSToFileConvertService fileCreateService;
 	
-	static ValidatorService validatorService;
+	 private ValidatorService validatorService;
 	
-	static FeedProcessorService feedProcessorService;
+	 private FeedProcessorService feedProcessorService;
 	
-	static int fileCountIndex;
+	 private int fileCountIndex;
 	/**
 	 *  initializing of all the objects and static variables.
 	 */
@@ -68,8 +68,13 @@ public class MainRSSReadController {
 	}
 	
 	public static void main(String[] args) {
-		
 		MainRSSReadController rssReadController = new MainRSSReadController();
+		rssReadController.rssReaderImpl();
+    
+	}
+
+	private void rssReaderImpl() {
+		
 		String replaceKeyword = null;
 		for(String link : rssService.getRSSLink()){
 			try {
@@ -80,10 +85,9 @@ public class MainRSSReadController {
 				System.exit(0);
 			}
 
-			rssReadController.RSSMainApplication(url, replaceKeyword);
+			RSSMainApplication(url, replaceKeyword);
 
 		}
-    
 	}
 
 
