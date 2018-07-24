@@ -13,25 +13,25 @@ public class RSSFeedOutputServiceImpl implements RSSFeedOutputService{
 	 *  replaces the keyword with an empty string.
 	 */
 	@Override
-	public SyndEntry replaceKeyword(SyndEntry entry, String replaceString) {
+	public SyndEntry replaceKeyword(SyndEntry entry, String keywordToBeReplaced) {
 		// TODO Auto-generated method stub
-	    if(replaceString.equals("")){
+	    if(keywordToBeReplaced.equals("")){
 	      return entry;
 	    }
 		List<SyndEnclosure> encls = entry.getEnclosures();
         SyndEntry modifiedEntry = new SyndEntryImpl();
-        modifiedEntry.setTitle(entry.getTitle().replaceAll("(?i).*"+replaceString+"*", ""));
-        modifiedEntry.setLink(entry.getLink().replaceAll("(?i).*"+replaceString+"*", ""));
-        modifiedEntry.setUri(entry.getUri().replaceAll("(?i).*"+replaceString+"*", ""));
+        modifiedEntry.setTitle(entry.getTitle().replaceAll("(?i).*"+keywordToBeReplaced+"*", ""));
+        modifiedEntry.setLink(entry.getLink().replaceAll("(?i).*"+keywordToBeReplaced+"*", ""));
+        modifiedEntry.setUri(entry.getUri().replaceAll("(?i).*"+keywordToBeReplaced+"*", ""));
         SyndContentImpl modifieddescription = new SyndContentImpl();
         modifieddescription.setType("text/html");
-        modifieddescription.setValue(entry.getDescription().getValue().replaceAll("(?i).*"+replaceString+"*", ""));
+        modifieddescription.setValue(entry.getDescription().getValue().replaceAll("(?i).*"+keywordToBeReplaced+"*", ""));
         modifiedEntry.setDescription(modifieddescription);  
         if(entry.getPublishedDate() !=null){
         	modifiedEntry.setPublishedDate(entry.getPublishedDate());
         }
         if(encls.size()!=0){
-        	encls.get(0).setUrl(encls.get(0).getUrl().replaceAll("(?i).*"+replaceString+"*", ""));
+        	encls.get(0).setUrl(encls.get(0).getUrl().replaceAll("(?i).*"+keywordToBeReplaced+"*", ""));
         	modifiedEntry.setEnclosures(encls);	
         }
         
