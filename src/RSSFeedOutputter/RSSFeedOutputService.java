@@ -1,4 +1,4 @@
-package RSSFeedProcessor;
+package RSSFeedOutputter;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 

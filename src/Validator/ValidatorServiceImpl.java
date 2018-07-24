@@ -12,25 +12,20 @@ import com.sun.syndication.io.XmlReader;
 public class ValidatorServiceImpl implements ValidatorService {
 
 	@Override
-	public SyndFeed linkValidator(URL url) {
+	public void linkValidator(URL url) {
 		
-		SyndFeed inputFeed;
 		SyndFeedInput input = new SyndFeedInput();
 		
 		try {
-			 inputFeed = input.build(new XmlReader(url));
+			 input.build(new XmlReader(url));
 		} catch (IllegalArgumentException e) {
 			System.out.println("Invalid URL Entered. Please check the URL Entered.");
-			return null;
 		} catch (FeedException e) {
 			System.out.println("Unable to read Feed!");
-			return null;
 		} catch (IOException e) {			
 			System.out.println("IO Problem!");
-			return null;
 		} 
 		
-		return inputFeed;
 		
 	}
 	

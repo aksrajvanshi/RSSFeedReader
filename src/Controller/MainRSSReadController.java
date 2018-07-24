@@ -31,7 +31,7 @@ public class MainRSSReadController {
 	
 	 private ValidatorService validatorService;
 	
-	 private FeedProcessorService feedProcessorService;
+	 private FeedProcessorService feedReaderAndProcessorService;
 	
 	 private int fileCountIndex;
 	/**
@@ -42,7 +42,7 @@ public class MainRSSReadController {
 		keywordService = new KeywordRetrieveServiceImpl();
 		fileCreateService = new RSSToFileConvertServiceImpl();
 		validatorService = new ValidatorServiceImpl();
-		feedProcessorService = new FeedProcessorServiceImpl();
+		feedReaderAndProcessorService = new FeedProcessorServiceImpl();
 		fileCountIndex = 1;
 	}
 	
@@ -53,14 +53,15 @@ public class MainRSSReadController {
 	 * The master method which processes the RSS Feed, retrieves the keyword, replaces the keyword and creates a file for that RSS Feed.
 	 */
 	public void RSSMainApplication(URL url, String keywordToBeReplaced){
-     
-        SyndFeed inputFeed = validatorService.linkValidator(url);
+         
+		validatorService.linkValidator(url);  		
+        SyndFeed inputFeed = feedReaderAndProcessorService.readFeed(url);
 		
         List<SyndEntry> modifiedFeedEntry = new ArrayList<>();
         SyndFeed modifiedFeed = new SyndFeedImpl();
         
         validatorService.validateInputFeed(inputFeed);
-        feedProcessorService.processFeed(keywordToBeReplaced, inputFeed, modifiedFeedEntry);
+        feedReaderAndProcessorService.processFeed(keywordToBeReplaced, inputFeed, modifiedFeedEntry);
         
         modifiedFeed.setEntries(modifiedFeedEntry);
         fileCreateService.CreateRssTextFile(modifiedFeed, fileCountIndex++);

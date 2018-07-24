@@ -1,4 +1,4 @@
-package RSSFeedProcessor;
+package RSSFeedOutputter;
 
 import java.util.List;
 

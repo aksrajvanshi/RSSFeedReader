@@ -9,7 +9,7 @@ public interface ValidatorService {
 	
 	public static final String STRING_EMPTY = "";
 	
-	public SyndFeed linkValidator(URL URL);
+	public void linkValidator(URL URL);
 	
 	public void validateInputFeed(SyndFeed inputFeed);
 	
